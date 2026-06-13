@@ -2,9 +2,6 @@
 
 SimpleEconomy is a modern economy plugin for Spigot/Paper with multicurrency support, pluggable storage, and a modular extension system.
 
-!!! warning
-    This branch is in active development. Multicurrency and the module system are evolving. Use in test environments only.
-
 ## Core Highlights
 
 - Multicurrency-first data model. Every operation depends on a currency key.

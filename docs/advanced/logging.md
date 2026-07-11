@@ -10,7 +10,7 @@ SimpleEconomy provides two logging channels:
 ## Transaction Logger
 
 - File: `plugins/SimpleEconomy/transactions.db`
-- Rotates when the size limit is exceeded
+- Rotates when the size limit in `transaction-logger.file-size-limit-mb` is exceeded
 - Table includes the `currency` column
 
 ```sql
@@ -27,6 +27,13 @@ CREATE TABLE IF NOT EXISTS transactions (
 );
 ```
 
+Logged transaction types are the values of `TransactionTypes`:
+
+- `PAY`
+- `WITHDRAW`
+- `DEPOSIT`
+- `ADMIN_ADJUSTMENT`
+
 !!! tip
     Use `/ehistory <player> [limit] [currency]` to fetch audit entries.
 
@@ -36,12 +43,34 @@ CREATE TABLE IF NOT EXISTS transactions (
 
 - Enable: `settings.enable-discord-logging: true`
 - Configure: `webhook-settings.*`
+- The webhook URL must not contain `your_webhook_url`
 
-Tracked events:
-- pay
-- remove
-- give/set
-- withdraw (voucher)
+Tracked log templates:
+
+- `pay`
+- `withdraw`
+- `give`
+- `set`
+- `remove`
+
+Embed templates live under `webhook-settings.embed-templates.*` and the footer text uses `webhook-settings.embed-templates.footer`.
+
+Useful placeholders inside templates:
+
+- `%sender%`
+- `%receiver%`
+- `%executor%`
+- `%target%`
+- `%player%`
+- `%amount%`
+- `%timestamp%` in the footer
 
 !!! warning
     If the webhook URL is empty or a placeholder, no payloads are sent.
+
+## Event Flow
+
+1. Economy operations fire `PreTransactionEvent`.
+2. If the event is not cancelled, the provider updates the balances.
+3. The provider then fires `PostTransactionEvent`.
+4. The transaction logger persists the action asynchronously.

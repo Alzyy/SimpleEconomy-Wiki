@@ -17,6 +17,8 @@ nav:
       - Storage System: advanced/storage.md
       - Cache System: advanced/cache.md
       - Logging System: advanced/logging.md
+  - Contributors:
+      - Build and Release: contributors/build-release.md
 
 theme:
   name: material
@@ -25,18 +27,18 @@ theme:
     text: "Fira Sans"
     code: "Fira Mono"
   palette:
-    - scheme: default
-      primary: cyan
-      accent: cyan
-      toggle:
-        icon: material/weather-night
-        name: Switch to dark mode
     - scheme: slate
-      primary: cyan
-      accent: cyan
+      primary: custom
+      accent: custom
       toggle:
         icon: material/white-balance-sunny
         name: Switch to light mode
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
   features:
     - navigation.tabs
     - navigation.top
@@ -70,3 +72,6 @@ markdown_extensions:
 
 plugins:
   - search
+
+extra_css:
+  - stylesheets/extra.css

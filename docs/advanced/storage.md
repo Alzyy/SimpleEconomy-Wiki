@@ -19,7 +19,8 @@ SimpleEconomy supports three backends: SQLite, MySQL, and File.
 ## SQLite
 
 - File: `plugins/SimpleEconomy/players.db`
-- HikariCP pool, single worker thread
+- HikariCP pool with a single connection
+- Table: `users`
 - Upsert on `(uuid, currency)`
 
 ```sql
@@ -38,6 +39,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 - Table: `<table-prefix>players`
 - Same schema as SQLite
+- Connection pool size comes from `database.max-connection-pool`
 
 ```sql
 CREATE TABLE IF NOT EXISTS `se_players` (
@@ -63,5 +65,12 @@ balances:
 last_seen: 1716123456789
 ```
 
-!!! tip
-    File storage is simple but not ideal for large servers.
+File storage also migrates legacy `balance` values into `balances.money` the first time a file is loaded.
+
+## Auto-Purge
+
+When `storage.enable-auto-purge` is enabled, inactive accounts are purged based on `storage.auto-purge-days`.
+
+- SQLite and MySQL delete rows with stale `last_seen` values.
+- File storage deletes stale player YAML files.
+

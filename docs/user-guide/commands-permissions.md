@@ -2,6 +2,19 @@
 
 Permissions follow the `simpleconomy.*` namespace.
 
+## Command Summary
+
+- `simpleconomy.command.reload` reloads config and language files.
+- `simpleconomy.command.diagnose` prints runtime diagnostics.
+- `simpleconomy.balance.others` allows checking another player's balance.
+- `simpleconomy.eco.set`, `simpleconomy.eco.give`, and `simpleconomy.eco.remove` control admin balance changes.
+- `simpleconomy.baltop.refresh` forces a leaderboard save and refresh.
+- `simpleconomy.command.currencies` opens the currency command tree.
+- `simpleconomy.command.currencies.manage` is required for currency creation, deletion, symbol changes, and listing.
+- `simpleconomy.command.modules` opens the module management command tree.
+- `simpleconomy.eco.history` allows transaction history lookup.
+- `simpleconomy.notify.update` enables join-time update notifications.
+
 ## /simpleconomy (aliases: /se, /simpleeconomy)
 
 **Purpose**: Show plugin identity and version for quick verification.
@@ -20,6 +33,15 @@ Permissions follow the `simpleconomy.*` namespace.
 
 - Permission: `simpleconomy.command.reload`
 - Examples: `/se reload`
+
+### /se diagnose
+
+**Purpose**: Print runtime diagnostics for the cache, storage backend, and worker pool.
+**Developer/Admin Use**: Inspect queue pressure, dirty cache size, and the active storage mode.
+
+- Permission: `simpleconomy.command.diagnose`
+- Output fields: cache size, dirty entries, storage type, active worker count, configured thread pool size, queue size
+- Examples: `/se diagnose`
 
 ---
 
@@ -47,18 +69,19 @@ Permissions follow the `simpleconomy.*` namespace.
 - Examples: `/pay Steve 250`, `/pay Alex 10.5`
 
 !!! warning
-    This command uses Vault. Ensure Vault is installed.
+    This command uses Vault. Ensure Vault is installed and providing the economy service.
 
 ---
 
 ## /eco
 
-**Purpose**: Administrative balance control for the default currency.
+**Purpose**: Administrative balance control for the default currency `money`.
 **User Use**: Not intended for regular players.
 **Developer/Admin Use**: Set, give, or remove balances for moderation and testing.
 
 - Format: `/eco <set|give|remove> <player|@a|@p|@r> <amount>`
 - Permissions: `simpleconomy.eco.set`, `simpleconomy.eco.give`, `simpleconomy.eco.remove`
+- Selector support: `@a`, `@p`, and `@r`
 - Examples: `/eco set Steve 500`, `/eco give @a 10`, `/eco remove Alex 25`
 
 ---
@@ -94,6 +117,9 @@ Permissions follow the `simpleconomy.*` namespace.
 - Permission: none
 - Examples: `/voucher 100`
 
+!!! note
+    `/voucher` is capped by `vouchers.max-check-amount` when that value is greater than zero.
+
 ---
 
 ## /currencies (aliases: /currs, /curs)
@@ -104,6 +130,8 @@ Permissions follow the `simpleconomy.*` namespace.
 
 - Base permission: `simpleconomy.command.currencies`
 - Manage permission: `simpleconomy.command.currencies.manage`
+
+All subcommands currently require `simpleconomy.command.currencies.manage`.
 
 ### /currencies create
 - Format: `/currencies create <name> <symbol>`
@@ -120,6 +148,9 @@ Permissions follow the `simpleconomy.*` namespace.
 ### /currencies list
 - Format: `/currencies list`
 
+!!! note
+    Each registered currency also creates a dynamic command named after that currency. For example, a currency named `Gems` can be invoked as `/gems`.
+
 ---
 
 ## /modules
@@ -129,6 +160,8 @@ Permissions follow the `simpleconomy.*` namespace.
 **Developer/Admin Use**: Load, disable, and verify module status.
 
 - Permission: `simpleconomy.command.modules`
+
+Modules are loaded from `plugins/SimpleEconomy/modules/`.
 
 ### /modules list
 - Examples: `/modules list`
@@ -144,6 +177,9 @@ Permissions follow the `simpleconomy.*` namespace.
 ### /modules loadfromfile
 - Format: `/modules loadfromfile <file.jar>`
 - Examples: `/modules loadfromfile MyModule.jar`
+
+!!! note
+    `loadfromfile` only works for JARs placed inside the modules folder. The loader expects a `module.yml` file at the JAR root.
 
 ---
 
@@ -161,8 +197,7 @@ Permissions follow the `simpleconomy.*` namespace.
 
 ## Update Notifications
 
-**Purpose**: Notify staff about available updates on join.
-**User Use**: Not intended for regular players.
-**Developer/Admin Use**: Receive update alerts in-game.
+Players with `simpleconomy.notify.update` receive a join message indicating whether a newer version is available.
 
-- Permission: `simpleconomy.notify.update`
+- If an update exists, the join message includes the latest version string.
+- If the plugin is current, the join message confirms that the server is on the latest version.

@@ -1,0 +1,245 @@
+/* ==========================================================================
+   1. VARIABILI DI BASE E MODALITÀ CHIARA (DEFAULT)
+   ========================================================================== */
+:root, [data-md-color-scheme="default"] {
+  --se-bg: #fafafa;
+  --se-bg-elevated: #ffffff;
+  --se-surface: #f3f0fa;
+  --se-surface-2: #eae4f5;
+  --se-border: #e2d9f3;
+  --se-border-strong: #7c3aed;
+  --se-text: #1e1b4b;
+  --se-muted: #6d28d9;
+  --se-link: #7c3aed;
+  --se-link-hover: #5b21b6; 
+  --se-accent: #8b5cf6;
+  --se-accent-2: #a855f7;
+  --se-accent-3: #4c1d95;
+
+  /* Reset variabili Material per evitare sovrascritture bianche */
+  --md-primary-fg-color: #ffffff !important;
+  --md-primary-bg-color: #1e1b4b !important;
+}
+
+/* Sfondo della pagina in modalità chiara */
+[data-md-color-scheme="default"] body {
+  background:
+    radial-gradient(circle at top left, rgba(139, 92, 246, 0.06), transparent 30%),
+    radial-gradient(circle at top right, rgba(168, 85, 247, 0.04), transparent 24%),
+    linear-gradient(180deg, #f5f3ff 0%, #fafafa 100%);
+  color: var(--se-text) !important;
+}
+
+/* Header e Barra dei Tab della modalità chiara (Sfondo chiaro) */
+[data-md-color-scheme="default"] .md-header {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.15) !important;
+}
+[data-md-color-scheme="default"] .md-tabs {
+  background-color: #fdfbff !important;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.1) !important;
+}
+
+/* Colore dei testi Normali nell'header, nei tab e nella barra di ricerca */
+[data-md-color-scheme="default"] .md-header__title,
+[data-md-color-scheme="default"] .md-tabs__link,
+[data-md-color-scheme="default"] .md-nav__title,
+[data-md-color-scheme="default"] .md-search__input,
+[data-md-color-scheme="default"] .md-search__label {
+  color: #4a4570 !important;
+  opacity: 1 !important;
+}
+
+/* FIX PER IL TESTO "SEARCH" BIANCO SU BIANCO */
+[data-md-color-scheme="default"] .md-search__form {
+  background-color: #f3f0fa !important;
+  border-radius: 0.25rem;
+}
+[data-md-color-scheme="default"] .md-search__input::placeholder {
+  color: #7a75a0 !important;
+}
+
+/* CONTROLLO TAB ATTIVO (QUANDO PREMUTO) NEL TEMA CHIARO */
+[data-md-color-scheme="default"] .md-tabs__meta,
+[data-md-color-scheme="default"] .md-tabs__link--active,
+[data-md-color-scheme="default"] .md-tabs__link:hover {
+  color: #7c3aed !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+}
+
+/* Icone (Cerca, Sole/Luna, GitHub) nel tema chiaro */
+[data-md-color-scheme="default"] .md-header__button,
+[data-md-color-scheme="default"] .md-search__icon,
+[data-md-color-scheme="default"] .md-search__icon .md-icon {
+  color: #4a4570 !important;
+}
+
+
+/* ==========================================================================
+   2. VARIABILI E REGOLE PER MODALITÀ SCURA (SLATE)
+   ========================================================================== */
+[data-md-color-scheme="slate"] {
+  --se-bg: #050508;
+  --se-bg-elevated: #0b0b12;
+  --se-surface: #11111d;
+  --se-surface-2: #181428;
+  --se-border: #2b2240;
+  --se-border-strong: #4c1d95;
+  --se-text: #f8f5ff;
+  --se-muted: #c4b5fd;
+  --se-link: #c084fc;
+  --se-link-hover: #f0abfc;
+  --se-accent: #8b5cf6;
+  --se-accent-2: #a855f7;
+  --se-accent-3: #ede9fe;
+
+  --md-default-bg-color: var(--se-bg) !important;
+  --md-default-fg-color: var(--se-text) !important;
+  --md-primary-fg-color: #050508 !important;
+  --md-primary-bg-color: var(--se-text) !important;
+}
+
+/* Sfondo della pagina in modalità scura */
+[data-md-color-scheme="slate"] body {
+  background:
+    radial-gradient(circle at top left, rgba(139, 92, 246, 0.16), transparent 30%),
+    radial-gradient(circle at top right, rgba(168, 85, 247, 0.12), transparent 24%),
+    linear-gradient(180deg, #07070b 0%, #050508 100%);
+  color: var(--se-text) !important;
+}
+
+/* Header e Barra dei Tab della modalità scura (Sfondo nero) */
+[data-md-color-scheme="slate"] .md-header,
+[data-md-color-scheme="slate"] .md-tabs {
+  background-color: #050508 !important;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.22) !important;
+}
+
+/* Colore dei testi nella barra superiore scura */
+[data-md-color-scheme="slate"] .md-header__title,
+[data-md-color-scheme="slate"] .md-tabs__link,
+[data-md-color-scheme="slate"] .md-nav__title,
+[data-md-color-scheme="slate"] .md-nav__link,
+[data-md-color-scheme="slate"] .md-search__label {
+  color: rgba(248, 245, 255, 0.7) !important;
+}
+
+/* CONTROLLO TAB ATTIVO (QUANDO PREMUTO) NEL TEMA SCURO */
+[data-md-color-scheme="slate"] .md-tabs__link--active,
+[data-md-color-scheme="slate"] .md-tabs__link:hover,
+[data-md-color-scheme="slate"] .md-nav__link--active,
+[data-md-color-scheme="slate"] .md-nav__link:hover {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Icone nel tema scuro */
+[data-md-color-scheme="slate"] .md-header__button,
+[data-md-color-scheme="slate"] .md-search__icon,
+[data-md-color-scheme="slate"] .md-search__icon .md-icon {
+  color: var(--se-text) !important;
+}
+
+
+/* ==========================================================================
+   3. ELEMENTI COMUNI ADATTIVI (CORPO DELLA PAGINA)
+   ========================================================================== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.015), transparent 26%),
+    linear-gradient(300deg, rgba(139, 92, 246, 0.04), transparent 35%);
+  z-index: -1;
+}
+
+.md-header,
+.md-tabs {
+  backdrop-filter: blur(18px);
+}
+
+.md-search__form,
+.md-search__output {
+  background: var(--se-bg-elevated) !important;
+}
+
+.md-content__inner {
+  padding-bottom: 4rem;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+  color: var(--se-accent-3) !important;
+}
+
+.md-typeset a {
+  color: var(--se-link) !important;
+}
+
+.md-typeset a:hover {
+  color: var(--se-link-hover) !important;
+}
+
+.md-typeset code,
+.md-typeset code.md-code__content {
+  background: rgba(139, 92, 246, 0.1) !important;
+  color: var(--se-accent-3) !important;
+  border: 1px solid rgba(139, 92, 246, 0.18) !important;
+  border-radius: 0.45rem;
+}
+
+.md-typeset pre > code {
+  background: var(--se-bg-elevated) !important;
+  border: 1px solid rgba(139, 92, 246, 0.2) !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.24) !important;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  background: var(--se-bg-elevated) !important;
+  border: 1px solid rgba(139, 92, 246, 0.22) !important;
+  border-radius: 1rem;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.12) !important;
+}
+
+.md-typeset .admonition-title,
+.md-typeset summary {
+  color: var(--se-accent-3) !important;
+}
+
+.md-typeset blockquote {
+  border-left-color: var(--se-accent) !important;
+  color: var(--se-muted) !important;
+}
+
+.md-typeset table {
+  background: var(--se-bg-elevated) !important;
+  border: 1px solid rgba(139, 92, 246, 0.18) !important;
+  border-radius: 0.85rem;
+  overflow: hidden;
+}
+
+.md-typeset th {
+  background: rgba(139, 92, 246, 0.14) !important;
+  color: var(--se-accent-3) !important;
+}
+
+.md-typeset td {
+  border-top: 1px solid rgba(139, 92, 246, 0.1) !important;
+}
+
+.md-typeset hr {
+  border-color: rgba(139, 92, 246, 0.18) !important;
+}
+
+.mermaid {
+  background: var(--se-bg-elevated) !important;
+  border: 1px solid rgba(139, 92, 246, 0.18) !important;
+  border-radius: 1rem;
+  padding: 1rem;
+}
